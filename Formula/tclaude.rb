@@ -18,6 +18,8 @@ class Tclaude < Formula
     zsh_completion.install "completions/_tclaude"
     zsh_completion.install "completions/_tclaude-kill"
     zsh_completion.install "completions/_tclaude-log"
+
+    (share/"tclaude/hooks").install "hooks/notify-telegram.sh"
   end
 
   def caveats
@@ -25,9 +27,9 @@ class Tclaude < Formula
       To set up Telegram notifications, run:
         tclaude-setup
 
-      The notification hook and Claude Code settings must be configured manually:
-        cp #{opt_prefix}/hooks/notify-telegram.sh ~/.claude/hooks/
-        See: https://github.com/BoutLabs/tclaude#readme
+      To install the notification hook, symlink it:
+        mkdir -p ~/.claude/hooks
+        ln -sf #{opt_share}/tclaude/hooks/notify-telegram.sh ~/.claude/hooks/notify-telegram.sh
     EOS
   end
 
